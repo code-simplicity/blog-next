@@ -1,3 +1,4 @@
+import Carousel from '@components/Carousel';
 import { AppShell, useMantineTheme } from '@mantine/core';
 import LayoutAsideBar from './asidebar';
 import LayoutFooter from './footer';
@@ -16,13 +17,31 @@ const LayoutApp = () => {
         }}
         navbarOffsetBreakpoint="sm"
         asideOffsetBreakpoint="sm"
-        fixed
         header={<LayoutHeader></LayoutHeader>}
         navbar={<LayoutNavBar></LayoutNavBar>}
         aside={<LayoutAsideBar></LayoutAsideBar>}
         footer={<LayoutFooter></LayoutFooter>}
       >
-        内容显示区域
+        <div>12</div>
+        <div>12</div>
+        <div>12</div>
+        <div>12</div>
+        <div>12</div>
+        <div>12</div>
+        <div>12</div>
+        <div>12</div>
+        <div>12</div>
+        <div>12</div>
+        <div>12</div>
+        <div>12</div>
+        <div>12</div>
+        <div>12</div>
+        <div>12</div>
+        <div>12</div>
+        <div>12</div>
+        <div>12</div>
+        <div>12</div>
+        <div>12</div>
       </AppShell>
     </>
   );

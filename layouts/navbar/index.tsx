@@ -6,7 +6,9 @@ const LayoutNavBar = () => {
   return (
     <>
       <Navbar p="md" hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 200, lg: 300 }}>
-        <Text>Application navbar</Text>
+        <Text className="text-yellow-800">
+          <span className="!text-yellow-800">Application navbar</span>
+        </Text>
       </Navbar>
     </>
   );

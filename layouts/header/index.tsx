@@ -1,3 +1,5 @@
+import AppLogo from '@components/Application/AppLogo';
+import Carousel from '@components/Carousel';
 import { Burger, Header, MediaQuery, Text, useMantineTheme } from '@mantine/core';
 import { useState } from 'react';
 
@@ -6,7 +8,7 @@ const LayoutHeader = () => {
   const [opened, setOpened] = useState(false);
   return (
     <>
-      <Header height={70} p="md">
+      <Header fixed height={60} p="md">
         <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
           <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
             <Burger
@@ -17,10 +19,12 @@ const LayoutHeader = () => {
               mr="xl"
             />
           </MediaQuery>
-
-          <Text>Application header</Text>
+          <AppLogo />
         </div>
       </Header>
+      <div className="mb-12">
+        <Carousel></Carousel>
+      </div>
     </>
   );
 };
