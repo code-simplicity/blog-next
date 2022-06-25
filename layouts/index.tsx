@@ -1,5 +1,5 @@
 import Carousel from '@components/Carousel';
-import { AppShell, useMantineTheme } from '@mantine/core';
+import { AppShell, Button, useMantineTheme } from '@mantine/core';
 import LayoutAsideBar from './asidebar';
 import LayoutFooter from './footer';
 import LayoutHeader from './header';
@@ -42,6 +42,9 @@ const LayoutApp = () => {
         <div>12</div>
         <div>12</div>
         <div>12</div>
+        <Button className="bg-dark-700 text-black" color="pink">
+          登录
+        </Button>
       </AppShell>
     </>
   );

@@ -1,7 +1,12 @@
+import SysConfig from '@locales/lang/zh-CN/sys';
+import { Button } from '@mantine/core';
+
 const AppLogo = () => {
   return (
     <>
-      <div>logo</div>
+      <section className="flex">
+        <span className="text-xl">{SysConfig.app.appName}</span>
+      </section>
     </>
   );
 };
