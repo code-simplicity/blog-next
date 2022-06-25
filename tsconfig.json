@@ -24,6 +24,9 @@
       "@components/*": [
         "components/*"
       ],
+      "@layouts/*": [
+        "layouts/*"
+      ],
       "@utils/*": [
         "utils/*"
       ],
