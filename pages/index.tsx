@@ -5,14 +5,13 @@ import styles from '../styles/Home.module.css';
 import { useState } from 'react';
 
 import { useMantineTheme } from '@mantine/core';
-import LayoutApp from '../layouts/index';
 
 const Home: NextPage = () => {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
   return (
     <>
-      <LayoutApp></LayoutApp>
+      <div>首页</div>
     </>
   );
 };

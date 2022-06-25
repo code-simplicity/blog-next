@@ -14,9 +14,10 @@ const Carousel = () => {
         modules={[Pagination]}
         scrollbar={{ draggable: true }}
       >
-        <SwiperSlide className="md:w-full md:h-full">
+        <SwiperSlide className="md:w-full">
           <Image
-            className="w-full md:h-80 object-contain overflow-hidden"
+            fit="cover"
+            className="w-full h-90 object-contain overflow-hidden"
             alt="Random unsplash image"
             src="https://w.wallhaven.cc/full/l3/wallhaven-l3xk6q.jpg"
           />
@@ -24,7 +25,7 @@ const Carousel = () => {
         <SwiperSlide className="md:w-full">
           <Image
             fit="cover"
-            className="w-full md:h-80 object-contain"
+            className="w-full h-90 object-contain overflow-hidden"
             alt="Random unsplash image"
             src="https://w.wallhaven.cc/full/l3/wallhaven-l3xk6q.jpg"
           />

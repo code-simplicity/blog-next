@@ -3,17 +3,17 @@ import type { AppProps } from 'next/app';
 
 import Head from 'next/head';
 import { MantineProvider } from '@mantine/core';
+import LayoutApp from '@layouts/index';
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
-
   return (
     <>
       <Head>
-        <title>Page title</title>
+        <title>博客主页</title>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
-
+      {/* 全局主题的配置 */}
       <MantineProvider
         withGlobalStyles
         withNormalizeCSS
@@ -21,6 +21,9 @@ export default function App(props: AppProps) {
           /** Put your mantine theme override here */
           colorScheme: 'light',
           primaryColor: 'orange',
+          fontFamily: 'Verdana, sans-serif',
+          fontFamilyMonospace: 'Monaco, Courier, monospace',
+          headings: { fontFamily: 'Greycliff CF, sans-serif' },
           colors: {
             // Add your color
             'deep-blue': ['#E9EDFC', '#C1CCF6', '#99ABF0' /* ... */],
@@ -35,7 +38,9 @@ export default function App(props: AppProps) {
         }}
         styles={{ Button: { root: { fontWeight: 400 } } }}
       >
-        <Component {...pageProps} />
+        <LayoutApp>
+          <Component {...pageProps} />
+        </LayoutApp>
       </MantineProvider>
     </>
   );

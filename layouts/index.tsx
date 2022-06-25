@@ -5,7 +5,8 @@ import LayoutFooter from './footer';
 import LayoutHeader from './header';
 import LayoutNavBar from './navbar';
 
-const LayoutApp = () => {
+// 整夜页面的布局，头部公共，尾部公共，中间替换组件
+const LayoutApp = ({ children }: any) => {
   const theme = useMantineTheme();
   return (
     <>
@@ -18,33 +19,9 @@ const LayoutApp = () => {
         navbarOffsetBreakpoint="sm"
         asideOffsetBreakpoint="sm"
         header={<LayoutHeader></LayoutHeader>}
-        navbar={<LayoutNavBar></LayoutNavBar>}
-        aside={<LayoutAsideBar></LayoutAsideBar>}
         footer={<LayoutFooter></LayoutFooter>}
       >
-        <div>12</div>
-        <div>12</div>
-        <div>12</div>
-        <div>12</div>
-        <div>12</div>
-        <div>12</div>
-        <div>12</div>
-        <div>12</div>
-        <div>12</div>
-        <div>12</div>
-        <div>12</div>
-        <div>12</div>
-        <div>12</div>
-        <div>12</div>
-        <div>12</div>
-        <div>12</div>
-        <div>12</div>
-        <div>12</div>
-        <div>12</div>
-        <div>12</div>
-        <Button className="bg-dark-700 text-black" color="pink">
-          登录
-        </Button>
+        {children}
       </AppShell>
     </>
   );

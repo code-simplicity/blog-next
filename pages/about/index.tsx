@@ -1,11 +1,10 @@
 import Carousel from '@components/Carousel';
+import LayoutApp from '@layouts/index';
 
 const About = () => {
   return (
     <>
-      <div>
-        <Carousel></Carousel>
-      </div>
+      <div>关于</div>
     </>
   );
 };

@@ -1,7 +1,9 @@
 import AppLogo from '@components/Application/AppLogo';
 import Carousel from '@components/Carousel';
+import Search from '@components/Header/Search';
 import UserDropdown from '@components/Header/UserDropdown/UserDropdown';
 import { Burger, Button, Header, MediaQuery, Text, useMantineTheme } from '@mantine/core';
+import Link from 'next/link';
 import { useState } from 'react';
 
 const LayoutHeader = () => {
@@ -25,11 +27,24 @@ const LayoutHeader = () => {
           </div>
           {/* 导航区域 */}
           <div className="flex flex-1">
-            <div>导航一</div>
-            <div>导航一</div>
-            <div>导航一</div>
-            <div>导航一</div>
-            <div>导航一</div>
+            <li>
+              <Link href="/">
+                <a>Home</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/about">
+                <a>About Us</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/blog/hello-world">
+                <a>Blog Post</a>
+              </Link>
+            </li>
+          </div>
+          <div>
+            <Search></Search>
           </div>
           {/* 用户功能区 */}
           <div className="flex items-center">
@@ -37,7 +52,7 @@ const LayoutHeader = () => {
           </div>
         </div>
       </Header>
-      <div className="mb-12">
+      <div>
         <Carousel></Carousel>
       </div>
     </>
