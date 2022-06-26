@@ -7,7 +7,6 @@
  * @Description:水平菜单
  */
 import type { RouteType } from '#types/route';
-import type { AppProps } from 'next/app';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Icon } from '@iconify/react';
@@ -15,6 +14,9 @@ import { Badge, Button, Menu } from '@mantine/core';
 import { BsChevronCompactDown, BsChevronCompactUp } from 'react-icons/bs';
 import { useState } from 'react';
 import { NextLink } from '@mantine/next';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCurrentActiveMenu } from '@store/modules/appSlice';
+import type { appSliceType } from '#types/store';
 
 interface HorizontalMenuTypes {
   Routers: any;
@@ -32,9 +34,10 @@ const HorizontalMenu = (props: HorizontalMenuTypes) => {
     setIsShowCompactDow('');
   };
   // 激活菜单
-  const [activePath, stActivePath] = useState();
+  const { currentActivityMenu } = useSelector((store: any) => store.app);
+  const dispatch = useDispatch();
   const activeMenu = (path: string) => {
-    stActivePath(path);
+    dispatch(setCurrentActiveMenu(path));
   };
   return (
     <>
@@ -88,12 +91,12 @@ const HorizontalMenu = (props: HorizontalMenuTypes) => {
           ) : (
             <Link href={item.path} key={item.path}>
               <div
-                className={`flex items-center mr-6 cursor-pointer ${
-                  item.path === activePath ? 'text-pink-600' : ''
+                className={`flex items-center mr-6 cursor-pointer menu-item-hover hover:text-purple-600 ${
+                  item.path === currentActivityMenu ? 'text-red-600 menu-item' : ''
                 }`}
                 onClick={() => activeMenu(item.path)}
               >
-                <span className="mr-2">
+                <span className="mr-1">
                   <Icon className="text-xl" icon={item.icon}></Icon>
                 </span>
                 <span>{item.name}</span>

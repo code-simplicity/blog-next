@@ -1,6 +1,7 @@
+import type { appSliceType } from '#types/store';
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
+const initialState: appSliceType = {
   currentActivityMenu: '/', // 当前激活的菜单
 };
 
@@ -15,7 +16,7 @@ export const appSlice = createSlice({
   },
 });
 
-const { setCurrentActiveMenu } = appSlice.actions;
+export const { setCurrentActiveMenu } = appSlice.actions;
 
 // 导出
 export default appSlice.reducer;

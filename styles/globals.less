@@ -52,3 +52,18 @@ a {
 ::-webkit-scrollbar-corner {
   background-color: red;
 }
+
+.menu-item {
+  position: relative;
+  line-height: 60px;
+  &::after {
+    background-color: #ed2d2d;
+    position: absolute;
+    bottom: 0;
+    left: 6px;
+    right: 6px;
+    content: '';
+    height: 4px;
+    border-radius: 6px 6px 0 0;
+  }
+}
