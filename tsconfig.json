@@ -42,6 +42,9 @@
       "@styles/*": [
         "styles/*"
       ],
+      "@router/*": [
+        "router/*"
+      ],
       "#types/*": [
         "types/*"
       ]

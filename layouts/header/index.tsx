@@ -2,7 +2,7 @@
  * @Author: bugdr
  * @Date: 2022-06-25 11:13:03
  * @LastEditors: bugdr
- * @LastEditTime: 2022-06-26 08:11:44
+ * @LastEditTime: 2022-06-26 09:39:55
  * @FilePath: \blog-next\layouts\header\index.tsx
  * @Description:
  */
@@ -10,7 +10,9 @@ import AppLogo from '@components/Application/AppLogo';
 import Carousel from '@components/Carousel';
 import Search from '@components/Header/Search';
 import UserDropdown from '@components/Header/UserDropdown/UserDropdown';
-import { Burger, Button, Header, MediaQuery, Text, useMantineTheme } from '@mantine/core';
+import HorizontalMenu from '@components/Menu/HorizontalMenu';
+import { Burger, Button, Header, MediaQuery, Menu, Text, useMantineTheme } from '@mantine/core';
+import Routers from '@router/index';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -19,7 +21,7 @@ const LayoutHeader = () => {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
   const router = useRouter();
-  console.log('router', router);
+  // 路由表的封装
   return (
     <>
       <Header fixed height={60} p="md">
@@ -38,21 +40,7 @@ const LayoutHeader = () => {
           </div>
           {/* 导航区域 */}
           <div className="flex flex-1">
-            <li>
-              <Link href="/">
-                <a>Home</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/about">
-                <a>About Us</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/blog/hello-world">
-                <a>Blog Post</a>
-              </Link>
-            </li>
+            <HorizontalMenu Routers={Routers} />
           </div>
           <div>
             <Search></Search>
