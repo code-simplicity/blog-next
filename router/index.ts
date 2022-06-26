@@ -63,13 +63,6 @@ const Routers: RouteType[] = [
     path: '/about',
     name: '关于',
     icon: 'simple-icons:aboutdotme',
-    children: [
-      {
-        path: '/codetalk',
-        name: '联系我',
-        icon: 'raphael:codetalk',
-      },
-    ],
   },
 ];
 

@@ -45,6 +45,9 @@
       "@router/*": [
         "router/*"
       ],
+      "@store/*": [
+        "store/*"
+      ],
       "#types/*": [
         "types/*"
       ]

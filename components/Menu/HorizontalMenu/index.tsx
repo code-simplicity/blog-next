@@ -31,6 +31,11 @@ const HorizontalMenu = (props: HorizontalMenuTypes) => {
   const handleMouseLeave = () => {
     setIsShowCompactDow('');
   };
+  // 激活菜单
+  const [activePath, stActivePath] = useState();
+  const activeMenu = (path: string) => {
+    stActivePath(path);
+  };
   return (
     <>
       <div className="flex items-center">
@@ -82,7 +87,12 @@ const HorizontalMenu = (props: HorizontalMenuTypes) => {
             </Menu>
           ) : (
             <Link href={item.path} key={item.path}>
-              <div className="flex items-center mr-6 cursor-pointer">
+              <div
+                className={`flex items-center mr-6 cursor-pointer ${
+                  item.path === activePath ? 'text-pink-600' : ''
+                }`}
+                onClick={() => activeMenu(item.path)}
+              >
                 <span className="mr-2">
                   <Icon className="text-xl" icon={item.icon}></Icon>
                 </span>
