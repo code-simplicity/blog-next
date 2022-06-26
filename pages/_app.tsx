@@ -4,6 +4,9 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { MantineProvider } from '@mantine/core';
 import LayoutApp from '@layouts/index';
+import { Provider } from 'react-redux';
+import { persister, store } from '@store/index';
+import { PersistGate } from 'redux-persist/lib/integration/react';
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
@@ -38,9 +41,13 @@ export default function App(props: AppProps) {
         }}
         styles={{ Button: { root: { fontWeight: 400 } } }}
       >
-        <LayoutApp>
-          <Component {...pageProps} />
-        </LayoutApp>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persister}>
+            <LayoutApp>
+              <Component {...pageProps} />
+            </LayoutApp>
+          </PersistGate>
+        </Provider>
       </MantineProvider>
     </>
   );
