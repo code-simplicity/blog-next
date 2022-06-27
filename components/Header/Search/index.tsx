@@ -2,11 +2,11 @@
  * @Author: bugdr
  * @Date: 2022-06-25 17:27:51
  * @LastEditors: bugdr
- * @LastEditTime: 2022-06-27 14:33:27
+ * @LastEditTime: 2022-06-27 16:15:11
  * @FilePath: \blog-next\components\Header\Search\index.tsx
  * @Description:
  */
-import { Button, Input } from '@mantine/core';
+import { Button, Group, Input } from '@mantine/core';
 import { BsSearch } from 'react-icons/bs';
 
 const Search = () => {
@@ -18,7 +18,11 @@ const Search = () => {
           placeholder="请输入搜索内容"
           radius="xs"
           size="sm"
-          rightSection={<Button className="p-2">搜索</Button>}
+          rightSection={
+            <Group>
+              <Button className="p-2">搜索</Button>
+            </Group>
+          }
         />
       </div>
     </>

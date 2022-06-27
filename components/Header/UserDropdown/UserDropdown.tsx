@@ -2,12 +2,13 @@
  * @Author: bugdr
  * @Date: 2022-06-25 16:43:00
  * @LastEditors: bugdr
- * @LastEditTime: 2022-06-27 15:23:46
+ * @LastEditTime: 2022-06-27 17:33:25
  * @FilePath: \blog-next\components\Header\UserDropdown\UserDropdown.tsx
  * @Description:
  */
-import { Avatar, Button } from '@mantine/core';
+import { Avatar, Button, Group } from '@mantine/core';
 import { BsFillBellFill } from 'react-icons/bs';
+import { BsFillShieldLockFill } from 'react-icons/bs';
 
 const UserDropdown = (props: any) => {
   const { setLoginModalOpened } = props;
@@ -18,9 +19,15 @@ const UserDropdown = (props: any) => {
     <>
       <div className="flex items-center">
         <div className="flex items-center">
-          <Button variant="outline" onClick={() => handleShowModal()}>
-            登录
-          </Button>
+          <Group>
+            <Button
+              leftIcon={<BsFillShieldLockFill />}
+              variant="outline"
+              onClick={() => handleShowModal()}
+            >
+              登录
+            </Button>
+          </Group>
         </div>
         <div className="flex items-center">
           <BsFillBellFill className="text-2xl" />

@@ -2,11 +2,27 @@
  * @Author: bugdr
  * @Date: 2022-06-27 14:44:58
  * @LastEditors: bugdr
- * @LastEditTime: 2022-06-27 16:02:40
+ * @LastEditTime: 2022-06-27 21:28:55
  * @FilePath: \blog-next\components\Login\index.tsx
  * @Description:登录的modal弹窗表单
  */
-import { Button, Group, Input, Modal, Title, useMantineTheme } from '@mantine/core';
+import LoginFormConfig from '@locales/lang/zh-CN/login';
+import {
+  Box,
+  Button,
+  Group,
+  Modal,
+  Title,
+  useMantineTheme,
+  Image,
+  Grid,
+  Text,
+} from '@mantine/core';
+import { useState } from 'react';
+import ForgotPasswordForm from './ForgotPasswordForm';
+import LoginForm from './LoginForm';
+import OtherForm from './OtherForm';
+import RegisterForm from './RegisterForm';
 
 const LoginModal = (props: any) => {
   const theme = useMantineTheme();
@@ -15,6 +31,138 @@ const LoginModal = (props: any) => {
   const setCloseOpened = () => {
     setLoginModalOpened(false);
   };
+
+  // 不同form的展示状态 {'loginForm, registerForm, otherForm, forgotPasswordForm'}
+  const [formCheckState, setFormCheckState] = useState(LoginFormConfig.login.formCheckState);
+  // 不同的状态显示不同的表单
+  const handleCheckFormState = (formState: string) => {
+    setFormCheckState(formState);
+  };
+
+  // 获取不同的组件
+  const getFormComponents = () => {
+    if (formCheckState === LoginFormConfig.login.formCheckState)
+      return (
+        <>
+          <LoginForm />
+          <Grid className="my-2">
+            <Grid.Col span={6}>
+              <Group>
+                <Button
+                  color="indigo"
+                  className="w-full"
+                  onClick={() => handleCheckFormState(LoginFormConfig.other.formCheckState)}
+                >
+                  其他方式登录
+                </Button>
+              </Group>
+            </Grid.Col>
+            <Grid.Col span={6}>
+              <Group>
+                <Button
+                  color="cyan"
+                  className="w-full"
+                  onClick={() => handleCheckFormState(LoginFormConfig.register.formCheckState)}
+                >
+                  注册
+                </Button>
+              </Group>
+            </Grid.Col>
+          </Grid>
+        </>
+      );
+    if (formCheckState === LoginFormConfig.register.formCheckState)
+      return (
+        <>
+          <RegisterForm />
+          <Grid className="my-2">
+            <Grid.Col span={6}>
+              <Group>
+                <Button
+                  color="indigo"
+                  className="w-full"
+                  onClick={() => handleCheckFormState(LoginFormConfig.login.formCheckState)}
+                >
+                  账户登录
+                </Button>
+              </Group>
+            </Grid.Col>
+            <Grid.Col span={6}>
+              <Group>
+                <Button
+                  color="indigo"
+                  className="w-full"
+                  onClick={() => handleCheckFormState(LoginFormConfig.other.formCheckState)}
+                >
+                  其他方式登录
+                </Button>
+              </Group>
+            </Grid.Col>
+          </Grid>
+        </>
+      );
+    if (formCheckState === LoginFormConfig.other.formCheckState)
+      return (
+        <>
+          <OtherForm />
+          <Grid className="my-2">
+            <Grid.Col span={6}>
+              <Group>
+                <Button
+                  color="indigo"
+                  className="w-full"
+                  onClick={() => handleCheckFormState(LoginFormConfig.login.formCheckState)}
+                >
+                  账户登录
+                </Button>
+              </Group>
+            </Grid.Col>
+            <Grid.Col span={6}>
+              <Group>
+                <Button
+                  color="cyan"
+                  className="w-full"
+                  onClick={() => handleCheckFormState(LoginFormConfig.register.formCheckState)}
+                >
+                  注册
+                </Button>
+              </Group>
+            </Grid.Col>
+          </Grid>
+        </>
+      );
+    if (formCheckState === LoginFormConfig.forgotPassword.formCheckState)
+      return (
+        <>
+          <ForgotPasswordForm />
+          <Grid className="my-2">
+            <Grid.Col span={6}>
+              <Group>
+                <Button
+                  color="indigo"
+                  className="w-full"
+                  onClick={() => handleCheckFormState(LoginFormConfig.login.formCheckState)}
+                >
+                  账户登录
+                </Button>
+              </Group>
+            </Grid.Col>
+            <Grid.Col span={6}>
+              <Group>
+                <Button
+                  color="indigo"
+                  className="w-full"
+                  onClick={() => handleCheckFormState(LoginFormConfig.other.formCheckState)}
+                >
+                  其他方式登录
+                </Button>
+              </Group>
+            </Grid.Col>
+          </Grid>
+        </>
+      );
+  };
+
   return (
     <>
       <Modal
@@ -31,9 +179,19 @@ const LoginModal = (props: any) => {
         style={{ marginTop: 80 }}
         title={<Title className="text-base md:text-xl">登录</Title>}
       >
-        <Input data-autofocus />
-        <Input data-autofocus />
-        <Input data-autofocus />
+        {getFormComponents()}
+        {formCheckState !== LoginFormConfig.forgotPassword.formCheckState ? (
+          <Group position="right">
+            <Text
+              color="pink"
+              size="sm"
+              className="cursor-pointer hover:text-green-700"
+              onClick={() => handleCheckFormState(LoginFormConfig.forgotPassword.formCheckState)}
+            >
+              忘记密码
+            </Text>
+          </Group>
+        ) : null}
       </Modal>
     </>
   );
