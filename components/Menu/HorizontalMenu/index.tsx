@@ -2,7 +2,7 @@
  * @Author: bugdr
  * @Date: 2022-06-26 09:14:54
  * @LastEditors: bugdr
- * @LastEditTime: 2022-06-26 20:45:45
+ * @LastEditTime: 2022-06-27 10:01:31
  * @FilePath: \blog-next\components\Menu\HorizontalMenu\index.tsx
  * @Description:水平菜单
  */
@@ -17,7 +17,7 @@ import { NextLink } from '@mantine/next';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentActiveMenu } from '@store/modules/appSlice';
 import type { appSliceType } from '#types/store';
-
+import { motion } from 'framer-motion';
 interface HorizontalMenuTypes {
   Routers: any;
 }
@@ -39,6 +39,7 @@ const HorizontalMenu = (props: HorizontalMenuTypes) => {
   const activeMenu = (path: string) => {
     dispatch(setCurrentActiveMenu(path));
   };
+
   return (
     <>
       <div className="flex items-center">
@@ -52,12 +53,18 @@ const HorizontalMenu = (props: HorizontalMenuTypes) => {
               onMouseEnter={() => handleMouseEnter(item.path)}
               onMouseLeave={() => handleMouseLeave()}
               position="bottom"
-              classNames={{
-                item: 'bg-blue-700 bg-opacity-50',
-                itemHovered: 'bg-pink-600',
-              }}
+              // classNames={{
+              //   item: `bg-blue-700 bg-opacity-50`,
+              //   itemHovered: 'bg-pink-600',
+              // }}
               control={
-                <div className="flex items-center mr-6">
+                <motion.div
+                  whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
+                  className={`flex items-center mr-6 cursor-pointer hover:text-purple-600 ${
+                    item.path === currentActivityMenu ? 'text-red-600 menu-item' : ''
+                  }`}
+                  onClick={() => activeMenu(item.path)}
+                >
                   <span className="mr-2">
                     <Icon className="text-xl" icon={item.icon}></Icon>
                   </span>
@@ -70,19 +77,25 @@ const HorizontalMenu = (props: HorizontalMenuTypes) => {
                       <BsChevronCompactUp />
                     )}
                   </span>
-                </div>
+                </motion.div>
               }
             >
               {item.children
                 ? item.children.map((child) => {
                     return (
                       <Menu.Item component={NextLink} href={child.path} key={child.path}>
-                        <div className="flex items-center">
+                        <motion.div
+                          whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
+                          className={`flex items-center mr-6 cursor-pointer hover:text-purple-600 ${
+                            child.path === currentActivityMenu ? 'text-pink-600' : ''
+                          }`}
+                          onClick={() => activeMenu(child.path)}
+                        >
                           <span>
                             <Icon icon={child.icon}></Icon>
                           </span>
                           <span>{child.name}</span>
-                        </div>
+                        </motion.div>
                       </Menu.Item>
                     );
                   })
@@ -90,17 +103,23 @@ const HorizontalMenu = (props: HorizontalMenuTypes) => {
             </Menu>
           ) : (
             <Link href={item.path} key={item.path}>
-              <div
-                className={`flex items-center mr-6 cursor-pointer menu-item-hover hover:text-purple-600 ${
+              <motion.div
+                whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
+                className={`
+                flex items-center mr-6 cursor-pointer hover:text-purple-600 ${
                   item.path === currentActivityMenu ? 'text-red-600 menu-item' : ''
                 }`}
                 onClick={() => activeMenu(item.path)}
               >
-                <span className="mr-1">
+                <motion.span
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 1 }}
+                  className="mr-1"
+                >
                   <Icon className="text-xl" icon={item.icon}></Icon>
-                </span>
+                </motion.span>
                 <span>{item.name}</span>
-              </div>
+              </motion.div>
             </Link>
           );
         })}

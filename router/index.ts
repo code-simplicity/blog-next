@@ -41,8 +41,13 @@ const Routers: RouteType[] = [
     icon: 'healthicons:biochemistry-laboratory',
     children: [
       {
-        path: '/pro',
+        path: '/prxo',
         name: '小程序',
+        icon: 'healthicons:biochemistry-laboratory',
+      },
+      {
+        path: '/xqiu',
+        name: '新球',
         icon: 'healthicons:biochemistry-laboratory',
       },
     ],
