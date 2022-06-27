@@ -2,7 +2,7 @@
  * @Author: bugdr
  * @Date: 2022-06-27 14:44:58
  * @LastEditors: bugdr
- * @LastEditTime: 2022-06-27 21:28:55
+ * @LastEditTime: 2022-06-27 21:48:46
  * @FilePath: \blog-next\components\Login\index.tsx
  * @Description:登录的modal弹窗表单
  */
@@ -32,11 +32,13 @@ const LoginModal = (props: any) => {
     setLoginModalOpened(false);
   };
 
+  const [title, setTitle] = useState(LoginFormConfig.login.title);
   // 不同form的展示状态 {'loginForm, registerForm, otherForm, forgotPasswordForm'}
   const [formCheckState, setFormCheckState] = useState(LoginFormConfig.login.formCheckState);
   // 不同的状态显示不同的表单
-  const handleCheckFormState = (formState: string) => {
-    setFormCheckState(formState);
+  const handleCheckFormState = (config: any) => {
+    setFormCheckState(config.formCheckState);
+    setTitle(config.title);
   };
 
   // 获取不同的组件
@@ -51,7 +53,7 @@ const LoginModal = (props: any) => {
                 <Button
                   color="indigo"
                   className="w-full"
-                  onClick={() => handleCheckFormState(LoginFormConfig.other.formCheckState)}
+                  onClick={() => handleCheckFormState(LoginFormConfig.other)}
                 >
                   其他方式登录
                 </Button>
@@ -62,7 +64,7 @@ const LoginModal = (props: any) => {
                 <Button
                   color="cyan"
                   className="w-full"
-                  onClick={() => handleCheckFormState(LoginFormConfig.register.formCheckState)}
+                  onClick={() => handleCheckFormState(LoginFormConfig.register)}
                 >
                   注册
                 </Button>
@@ -81,7 +83,7 @@ const LoginModal = (props: any) => {
                 <Button
                   color="indigo"
                   className="w-full"
-                  onClick={() => handleCheckFormState(LoginFormConfig.login.formCheckState)}
+                  onClick={() => handleCheckFormState(LoginFormConfig.login)}
                 >
                   账户登录
                 </Button>
@@ -92,7 +94,7 @@ const LoginModal = (props: any) => {
                 <Button
                   color="indigo"
                   className="w-full"
-                  onClick={() => handleCheckFormState(LoginFormConfig.other.formCheckState)}
+                  onClick={() => handleCheckFormState(LoginFormConfig.other)}
                 >
                   其他方式登录
                 </Button>
@@ -111,7 +113,7 @@ const LoginModal = (props: any) => {
                 <Button
                   color="indigo"
                   className="w-full"
-                  onClick={() => handleCheckFormState(LoginFormConfig.login.formCheckState)}
+                  onClick={() => handleCheckFormState(LoginFormConfig.login)}
                 >
                   账户登录
                 </Button>
@@ -122,7 +124,7 @@ const LoginModal = (props: any) => {
                 <Button
                   color="cyan"
                   className="w-full"
-                  onClick={() => handleCheckFormState(LoginFormConfig.register.formCheckState)}
+                  onClick={() => handleCheckFormState(LoginFormConfig.register)}
                 >
                   注册
                 </Button>
@@ -141,7 +143,7 @@ const LoginModal = (props: any) => {
                 <Button
                   color="indigo"
                   className="w-full"
-                  onClick={() => handleCheckFormState(LoginFormConfig.login.formCheckState)}
+                  onClick={() => handleCheckFormState(LoginFormConfig.login)}
                 >
                   账户登录
                 </Button>
@@ -152,7 +154,7 @@ const LoginModal = (props: any) => {
                 <Button
                   color="indigo"
                   className="w-full"
-                  onClick={() => handleCheckFormState(LoginFormConfig.other.formCheckState)}
+                  onClick={() => handleCheckFormState(LoginFormConfig.other)}
                 >
                   其他方式登录
                 </Button>
@@ -177,7 +179,7 @@ const LoginModal = (props: any) => {
         transitionDuration={600}
         transitionTimingFunction="ease"
         style={{ marginTop: 80 }}
-        title={<Title className="text-base md:text-xl">登录</Title>}
+        title={<Title className="text-base md:text-xl">{title}</Title>}
       >
         {getFormComponents()}
         {formCheckState !== LoginFormConfig.forgotPassword.formCheckState ? (
@@ -186,7 +188,7 @@ const LoginModal = (props: any) => {
               color="pink"
               size="sm"
               className="cursor-pointer hover:text-green-700"
-              onClick={() => handleCheckFormState(LoginFormConfig.forgotPassword.formCheckState)}
+              onClick={() => handleCheckFormState(LoginFormConfig.forgotPassword)}
             >
               忘记密码
             </Text>

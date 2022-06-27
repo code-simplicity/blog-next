@@ -2,7 +2,7 @@
  * @Author: bugdr
  * @Date: 2022-06-27 19:49:53
  * @LastEditors: bugdr
- * @LastEditTime: 2022-06-27 20:23:28
+ * @LastEditTime: 2022-06-27 22:26:50
  * @FilePath: \blog-next\components\Login\OtherForm\index.tsx
  * @Description:其他方式登录
  */
@@ -10,8 +10,15 @@
 import Verification from '@components/Verification';
 import { Box, Button, Grid, Group, PasswordInput, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { BsFillPatchCheckFill } from 'react-icons/bs';
-import { AiOutlineAlipayCircle, AiFillWechat, AiFillGithub } from 'react-icons/ai';
+import {
+  AiOutlineAlipayCircle,
+  AiFillWechat,
+  AiFillGithub,
+  AiOutlineAntDesign,
+  AiOutlineVerified,
+} from 'react-icons/ai';
+import { MdMarkEmailRead } from 'react-icons/md';
+
 const OtherForm = () => {
   // 表单的hooks
   const form = useForm({
@@ -29,11 +36,18 @@ const OtherForm = () => {
     <>
       <Box>
         <form onSubmit={form.onSubmit(handleSubmit)}>
-          <TextInput className="mb-2 md:mb-4" placeholder="留下你的大名" />
-          <PasswordInput className="mb-2 md:mb-4" placeholder="悄悄输入密码哦" />
+          <TextInput
+            icon={<MdMarkEmailRead />}
+            className="mb-2 md:mb-4"
+            placeholder="请输入你的邮箱"
+          />
           <Grid>
             <Grid.Col span={7}>
-              <TextInput className="mb-2 md:mb-4" placeholder="输入图灵验证码" />
+              <TextInput
+                icon={<AiOutlineVerified />}
+                className="mb-2 md:mb-4"
+                placeholder="邮箱验证码呢"
+              />
             </Grid.Col>
             <Grid.Col span={5}>
               <Verification />
@@ -41,12 +55,12 @@ const OtherForm = () => {
           </Grid>
           <Group position="right" mt="md">
             <Button
-              leftIcon={<BsFillPatchCheckFill className="text-xl" />}
+              leftIcon={<AiOutlineAntDesign className="text-xl" />}
               loaderPosition="right"
               fullWidth
               type="submit"
             >
-              登录
+              邮箱登录
             </Button>
           </Group>
           <div className="grid grid-cols-3 gap-4 my-4 text-3xl cursor-pointer">
