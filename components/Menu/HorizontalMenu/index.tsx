@@ -2,7 +2,7 @@
  * @Author: bugdr
  * @Date: 2022-06-26 09:14:54
  * @LastEditors: bugdr
- * @LastEditTime: 2022-06-27 13:10:24
+ * @LastEditTime: 2022-06-27 13:59:02
  * @FilePath: \blog-next\components\Menu\HorizontalMenu\index.tsx
  * @Description:水平菜单
  */
@@ -58,7 +58,7 @@ const HorizontalMenu = (props: HorizontalMenuTypes) => {
   };
   return (
     <>
-      <div className="flex items-center">
+      <div className="flex items-center truncate">
         {Routers.map((item: RouteType) => {
           return item.children && item.children.length ? (
             <Menu

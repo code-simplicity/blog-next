@@ -2,7 +2,7 @@
  * @Author: bugdr
  * @Date: 2022-06-25 11:13:03
  * @LastEditors: bugdr
- * @LastEditTime: 2022-06-26 09:39:55
+ * @LastEditTime: 2022-06-27 14:14:30
  * @FilePath: \blog-next\layouts\header\index.tsx
  * @Description:
  */
@@ -24,9 +24,9 @@ const LayoutHeader = () => {
   // 路由表的封装
   return (
     <>
-      <Header fixed height={60} p="md">
-        <div className="flex items-center justify-between md:h-full">
-          <div className="flex md:mr-24">
+      <Header fixed height={60} className="lg:pl-36 md:pr-4 sm:px-2">
+        <div className="flex items-center md:h-full">
+          <div className="flex md:mr-6">
             <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
               <Burger
                 opened={opened}
@@ -46,7 +46,7 @@ const LayoutHeader = () => {
             <Search></Search>
           </div>
           {/* 用户功能区 */}
-          <div className="flex items-center">
+          <div className="flex items-center truncate">
             <UserDropdown></UserDropdown>
           </div>
         </div>

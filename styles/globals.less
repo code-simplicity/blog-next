@@ -67,3 +67,17 @@ a {
     border-radius: 6px 6px 0 0;
   }
 }
+
+.app-title {
+  position: relative;
+  &::after {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 2px;
+    height: 20px;
+    content: '';
+    background-color: #f93959;
+    transform: translateY(-50%);
+  }
+}
