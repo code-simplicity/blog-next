@@ -2,7 +2,7 @@
  * @Author: bugdr
  * @Date: 2022-06-25 11:13:03
  * @LastEditors: bugdr
- * @LastEditTime: 2022-06-27 14:14:30
+ * @LastEditTime: 2022-06-27 15:25:31
  * @FilePath: \blog-next\layouts\header\index.tsx
  * @Description:
  */
@@ -10,6 +10,7 @@ import AppLogo from '@components/Application/AppLogo';
 import Carousel from '@components/Carousel';
 import Search from '@components/Header/Search';
 import UserDropdown from '@components/Header/UserDropdown/UserDropdown';
+import LoginModal from '@components/Login';
 import HorizontalMenu from '@components/Menu/HorizontalMenu';
 import { Burger, Button, Header, MediaQuery, Menu, Text, useMantineTheme } from '@mantine/core';
 import Routers from '@router/index';
@@ -21,6 +22,8 @@ const LayoutHeader = () => {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
   const router = useRouter();
+  // 打开登录框
+  const [loginModalOpened, setLoginModalOpened] = useState(false);
   // 路由表的封装
   return (
     <>
@@ -47,8 +50,12 @@ const LayoutHeader = () => {
           </div>
           {/* 用户功能区 */}
           <div className="flex items-center truncate">
-            <UserDropdown></UserDropdown>
+            <UserDropdown setLoginModalOpened={setLoginModalOpened}></UserDropdown>
           </div>
+          <LoginModal
+            loginModalOpened={loginModalOpened}
+            setLoginModalOpened={setLoginModalOpened}
+          ></LoginModal>
         </div>
       </Header>
       {/* 这里只有首页路由才可以显示 */}

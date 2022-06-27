@@ -1,7 +1,16 @@
+/*
+ * @Author: bugdr
+ * @Date: 2022-06-25 09:06:48
+ * @LastEditors: bugdr
+ * @LastEditTime: 2022-06-27 14:38:42
+ * @FilePath: \blog-next\pages\_app.tsx
+ * @Description:
+ */
 import '../styles/globals.less';
 import type { AppProps } from 'next/app';
 
 import Head from 'next/head';
+import type { ButtonStylesParams } from '@mantine/core';
 import { MantineProvider } from '@mantine/core';
 import LayoutApp from '@layouts/index';
 import { Provider } from 'react-redux';
@@ -28,18 +37,31 @@ export default function App(props: AppProps) {
           fontFamilyMonospace: 'Monaco, Courier, monospace',
           headings: { fontFamily: 'Greycliff CF, sans-serif' },
           colors: {
-            // Add your color
             'deep-blue': ['#E9EDFC', '#C1CCF6', '#99ABF0' /* ... */],
-            // or replace default theme color
             blue: ['#E9EDFC', '#C1CCF6', '#99ABF0' /* ... */],
           },
           shadows: {
-            // other shadows (xs, sm, lg) will be merged from default theme
             md: '1px 1px 3px rgba(0,0,0,.25)',
             xl: '5px 5px 3px rgba(0,0,0,.25)',
           },
         }}
-        styles={{ Button: { root: { fontWeight: 400 } } }}
+        styles={{
+          Button: (theme, params: ButtonStylesParams) => ({
+            root: { height: 36, padding: '0 26px' },
+            filled: {
+              color: theme.colors[params.color || theme.primaryColor][6],
+              '&:hover': {
+                color: theme.colors[params.color || theme.primaryColor][1],
+              },
+            },
+            outline: {
+              '&:hover': {
+                backgroundColor:
+                  theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
+              },
+            },
+          }),
+        }}
       >
         <Provider store={store}>
           <PersistGate loading={null} persistor={persister}>
