@@ -2,7 +2,7 @@
  * @Author: bugdr
  * @Date: 2022-06-26 09:23:36
  * @LastEditors: bugdr
- * @LastEditTime: 2022-06-26 19:41:24
+ * @LastEditTime: 2022-06-27 10:50:09
  * @FilePath: \blog-next\router\index.ts
  * @Description:菜单路由的封装
  */
@@ -41,7 +41,7 @@ const Routers: RouteType[] = [
     icon: 'healthicons:biochemistry-laboratory',
     children: [
       {
-        path: '/prxo',
+        path: '/prox',
         name: '小程序',
         icon: 'healthicons:biochemistry-laboratory',
       },
@@ -58,8 +58,8 @@ const Routers: RouteType[] = [
     icon: 'dashicons:admin-links',
     children: [
       {
-        path: '/codetalk',
-        name: '杂谈',
+        path: '/cxodetalk',
+        name: '杂谈1',
         icon: 'raphael:codetalk',
       },
     ],

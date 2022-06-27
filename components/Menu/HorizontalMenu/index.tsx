@@ -2,7 +2,7 @@
  * @Author: bugdr
  * @Date: 2022-06-26 09:14:54
  * @LastEditors: bugdr
- * @LastEditTime: 2022-06-27 10:01:31
+ * @LastEditTime: 2022-06-27 13:10:24
  * @FilePath: \blog-next\components\Menu\HorizontalMenu\index.tsx
  * @Description:水平菜单
  */
@@ -15,7 +15,7 @@ import { BsChevronCompactDown, BsChevronCompactUp } from 'react-icons/bs';
 import { useState } from 'react';
 import { NextLink } from '@mantine/next';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCurrentActiveMenu } from '@store/modules/appSlice';
+import { setCurrentActiveMenu, setCurrentActivityChillerMenu } from '@store/modules/appSlice';
 import type { appSliceType } from '#types/store';
 import { motion } from 'framer-motion';
 interface HorizontalMenuTypes {
@@ -26,20 +26,36 @@ const HorizontalMenu = (props: HorizontalMenuTypes) => {
   const { Routers } = props;
   // 有二级菜单的切换图标
   const [isShowCompactDow, setIsShowCompactDow] = useState<string>('');
+  // 鼠标移动激活的菜单
+  const [mouseActiveMenu, setMouseActiveMenu] = useState<string>('');
+  // 激活菜单
+  const { currentActivityMenu, currentActivityChillerMenu } = useSelector(
+    (store: any) => store.app,
+  );
+  const dispatch = useDispatch();
   // 通过鼠标的移入移除事件进行判断
-  const handleMouseEnter = (path: string) => {
-    setIsShowCompactDow(path);
+  const handleMouseEnter = (item: any) => {
+    setIsShowCompactDow(item.path);
+    setMouseActiveMenu(item.path);
   };
+  // 控制子菜单的移除
   const handleMouseLeave = () => {
     setIsShowCompactDow('');
+    setMouseActiveMenu('');
   };
-  // 激活菜单
-  const { currentActivityMenu } = useSelector((store: any) => store.app);
-  const dispatch = useDispatch();
-  const activeMenu = (path: string) => {
-    dispatch(setCurrentActiveMenu(path));
+  const activeMenu = (item: any) => {
+    dispatch(setCurrentActiveMenu(item.path));
+    // 如果不是触发子菜单，那就取消子菜单的选中
+    if (currentActivityChillerMenu !== '') {
+      dispatch(setCurrentActivityChillerMenu(''));
+    }
   };
-
+  // 激活的子菜单
+  const activeChildeMenu = (item: any, child: any) => {
+    // 激活子菜单之后触发激活父菜单
+    activeMenu(item);
+    dispatch(setCurrentActivityChillerMenu(child.path));
+  };
   return (
     <>
       <div className="flex items-center">
@@ -50,20 +66,17 @@ const HorizontalMenu = (props: HorizontalMenuTypes) => {
               trigger="hover"
               size="xs"
               shadow="xl"
-              onMouseEnter={() => handleMouseEnter(item.path)}
+              onMouseEnter={() => handleMouseEnter(item)}
               onMouseLeave={() => handleMouseLeave()}
               position="bottom"
-              // classNames={{
-              //   item: `bg-blue-700 bg-opacity-50`,
-              //   itemHovered: 'bg-pink-600',
-              // }}
               control={
                 <motion.div
                   whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
                   className={`flex items-center mr-6 cursor-pointer hover:text-purple-600 ${
-                    item.path === currentActivityMenu ? 'text-red-600 menu-item' : ''
-                  }`}
-                  onClick={() => activeMenu(item.path)}
+                    item.path === mouseActiveMenu ? 'text-red-600 menu-item' : ''
+                  } ${item.path === currentActivityMenu ? 'text-red-600 menu-item' : ''}
+                  `}
+                  onClick={() => activeMenu(item)}
                 >
                   <span className="mr-2">
                     <Icon className="text-xl" icon={item.icon}></Icon>
@@ -83,13 +96,18 @@ const HorizontalMenu = (props: HorizontalMenuTypes) => {
               {item.children
                 ? item.children.map((child) => {
                     return (
-                      <Menu.Item component={NextLink} href={child.path} key={child.path}>
+                      <Menu.Item
+                        component={NextLink}
+                        href={child.path}
+                        key={child.path}
+                        onClick={() => activeChildeMenu(item, child)}
+                        onMouseLeave={() => handleMouseLeave()}
+                      >
                         <motion.div
                           whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
                           className={`flex items-center mr-6 cursor-pointer hover:text-purple-600 ${
-                            child.path === currentActivityMenu ? 'text-pink-600' : ''
+                            child.path === currentActivityChillerMenu ? 'text-pink-600' : ''
                           }`}
-                          onClick={() => activeMenu(child.path)}
                         >
                           <span>
                             <Icon icon={child.icon}></Icon>
@@ -104,12 +122,14 @@ const HorizontalMenu = (props: HorizontalMenuTypes) => {
           ) : (
             <Link href={item.path} key={item.path}>
               <motion.div
+                onMouseEnter={() => handleMouseEnter(item)}
+                onMouseLeave={() => handleMouseLeave()}
                 whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
                 className={`
                 flex items-center mr-6 cursor-pointer hover:text-purple-600 ${
-                  item.path === currentActivityMenu ? 'text-red-600 menu-item' : ''
-                }`}
-                onClick={() => activeMenu(item.path)}
+                  item.path === mouseActiveMenu ? 'text-red-600 menu-item' : ''
+                }  ${item.path === currentActivityMenu ? 'text-red-600 menu-item' : ''}`}
+                onClick={() => activeMenu(item)}
               >
                 <motion.span
                   animate={{ rotate: 360 }}
