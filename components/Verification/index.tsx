@@ -6,16 +6,32 @@
  * @FilePath: \blog-next\components\Verification\index.tsx
  * @Description:图灵验证码
  */
+import { UserApi } from '@api/user/index';
 import { Image } from '@mantine/core';
+import { useEffect, useState } from 'react';
 
 const Verification = () => {
+  const [captchaSrc, setCaptchaSrc] = useState<string>();
+
+  // 获取图灵验证码
+  const getVerification = () => {
+    // 调用获取验证码的接口
+    const isDate = String(new Date()); // 时间类型格式化
+    const result = `${UserApi.GetCaptcha}?random=${Date.parse(isDate)}`;
+    setCaptchaSrc(result);
+  };
+  useEffect(() => {
+    getVerification();
+  }, [captchaSrc]);
   return (
     <>
       <Image
+        onClick={() => getVerification()}
         radius="sm"
         height={36}
-        src="https://images.unsplash.com/photo-1511216335778-7cb8f49fa7a3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80"
+        src={captchaSrc}
         alt="Random unsplash image"
+        className="cursor-pointer"
       />
     </>
   );

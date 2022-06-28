@@ -21,6 +21,9 @@
     // 基础路径
     "baseUrl": ".",
     "paths": {
+      "@api/*": [
+        "api/*"
+      ],
       "@components/*": [
         "components/*"
       ],

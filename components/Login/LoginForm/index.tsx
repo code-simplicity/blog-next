@@ -13,29 +13,37 @@ import { FaUserLock } from 'react-icons/fa';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import { GoVerified } from 'react-icons/go';
 import { AiOutlineAntDesign } from 'react-icons/ai';
+import { doLogin } from '@api/user';
 
 const LoginForm = () => {
   // 表单的hooks
   const form = useForm({
     initialValues: {
-      userName: '', // 用户名
-      password: '', // 密码
+      userName: '468264345@qq.com', // 用户名
+      password: '123456', // 密码
       captcha: '', // 图灵验证码
     },
   });
   type FormValues = typeof form.values;
-  const handleSubmit = (values: FormValues) => {
-    console.log('values', values);
+  const handleSubmit = async (values: FormValues) => {
+    const result = await doLogin(values);
+    console.log('result :>> ', result);
   };
   return (
     <>
       <Box>
         <form onSubmit={form.onSubmit(handleSubmit)}>
-          <TextInput icon={<FaUserLock />} className="mb-2 md:mb-4" placeholder="留下你的大名" />
+          <TextInput
+            icon={<FaUserLock />}
+            className="mb-2 md:mb-4"
+            placeholder="留下你的大名"
+            {...form.getInputProps('userName')}
+          />
           <PasswordInput
             icon={<RiLockPasswordFill />}
             className="mb-2 md:mb-4"
             placeholder="悄悄输入密码哦"
+            {...form.getInputProps('password')}
           />
           <Grid>
             <Grid.Col span={7}>
@@ -43,6 +51,7 @@ const LoginForm = () => {
                 icon={<GoVerified />}
                 className="mb-2 md:mb-4"
                 placeholder="输入图灵验证码"
+                {...form.getInputProps('captcha')}
               />
             </Grid.Col>
             <Grid.Col span={5}>

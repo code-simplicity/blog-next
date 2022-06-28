@@ -17,6 +17,7 @@ import { Provider } from 'react-redux';
 import { persister, store } from '@store/index';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 import { NotificationsProvider } from '@mantine/notifications';
+import { SWRConfig } from 'swr';
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;

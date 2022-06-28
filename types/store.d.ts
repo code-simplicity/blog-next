@@ -11,3 +11,14 @@ export interface appSliceType {
   currentActivityChillerMenu: string;
   mouseActiveMenu: string;
 }
+
+export interface userInfoType {
+  id?: string;
+  userName?: string;
+  avatar?: string;
+}
+
+export interface userSliceType {
+  userInfo: userInfoType;
+  tokenKey: string;
+}

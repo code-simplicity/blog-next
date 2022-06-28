@@ -230,9 +230,9 @@ function createAxios(options?: Partial<CreateAxiosOptions>) {
           // 消息提示类型
           errorMessageMode: 'message',
           // 接口地址
-          apiUrl: '',
+          apiUrl: 'http://localhost:3000',
           // 接口拼接地址
-          urlPrefix: '&',
+          urlPrefix: '',
           //  是否加入时间戳
           joinTime: true,
           // 忽略重复请求
