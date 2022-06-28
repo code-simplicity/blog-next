@@ -31,7 +31,7 @@
         "locales/*"
       ],
       "@pages/*": [
-        "pages/*"
+        "src/pages/*"
       ],
       "@utils/*": [
         "utils/*"
@@ -41,6 +41,9 @@
       ],
       "@styles/*": [
         "styles/*"
+      ],
+      "@hooks/*": [
+        "hooks/*"
       ],
       "@router/*": [
         "router/*"

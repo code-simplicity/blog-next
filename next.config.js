@@ -4,6 +4,15 @@ const withLess = require('next-with-less');
 const nextConfig = withLess({
   reactStrictMode: true,
   lessLoaderOptions: {},
+  // async redirects() {
+  //   return [
+  //     {
+  //       source: '/',
+  //       destination: '/index',
+  //       permanent: true,
+  //     },
+  //   ];
+  // },
 });
 
 module.exports = nextConfig;

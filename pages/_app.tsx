@@ -2,7 +2,7 @@
  * @Author: bugdr
  * @Date: 2022-06-25 09:06:48
  * @LastEditors: bugdr
- * @LastEditTime: 2022-06-27 14:38:42
+ * @LastEditTime: 2022-06-28 09:46:51
  * @FilePath: \blog-next\pages\_app.tsx
  * @Description:
  */
@@ -16,6 +16,7 @@ import LayoutApp from '@layouts/index';
 import { Provider } from 'react-redux';
 import { persister, store } from '@store/index';
 import { PersistGate } from 'redux-persist/lib/integration/react';
+import { NotificationsProvider } from '@mantine/notifications';
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
@@ -65,9 +66,11 @@ export default function App(props: AppProps) {
       >
         <Provider store={store}>
           <PersistGate loading={null} persistor={persister}>
-            <LayoutApp>
-              <Component {...pageProps} />
-            </LayoutApp>
+            <NotificationsProvider position="top-right" zIndex={2077} autoClose={3000}>
+              <LayoutApp>
+                <Component {...pageProps} />
+              </LayoutApp>
+            </NotificationsProvider>
           </PersistGate>
         </Provider>
       </MantineProvider>
