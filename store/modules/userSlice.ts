@@ -7,19 +7,19 @@ import { ResponseCode } from '@utils/enums/ResponseCode';
 // 触发获取用户登录的action
 export const checkUserInfoByToken: any = createAsyncThunk('/user/check-token', async () => {
   const result = await checkToken();
-  // 登录成功
   if (result.code === ResponseCode.SUCCESS) {
+    // 登录成功
     showNotification({
       title: '登录成功',
-      message: `${result.message}🤥`,
+      message: `${result.message}`,
     });
     return result.result;
   } else {
+    // 登录失败
     showNotification({
-      title: '账户未登录',
-      message: '账户未登录',
+      title: '用户未登录',
+      message: `${result.message}`,
     });
-    return result;
   }
 });
 
@@ -60,7 +60,6 @@ export const userSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    console.log('builder', builder);
     // 异步触发获取用户信息
     builder.addCase(checkUserInfoByToken.fulfilled, (state, action) => {
       state.userInfo = action.payload;

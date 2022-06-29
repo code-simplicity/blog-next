@@ -8,7 +8,7 @@
  */
 import Verification from '@components/Verification';
 import { Box, Button, Grid, Group, PasswordInput, TextInput } from '@mantine/core';
-import { useForm } from '@mantine/form';
+import { useForm, zodResolver } from '@mantine/form';
 import { FaClosedCaptioning, FaPassport, FaUserLock } from 'react-icons/fa';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import { GoVerified } from 'react-icons/go';
@@ -16,13 +16,22 @@ import { AiOutlineAntDesign } from 'react-icons/ai';
 import { doLogin } from '@api/user';
 import { ResponseCode } from '@utils/enums/ResponseCode';
 import { useDispatch } from 'react-redux';
-import { setTokenKey } from '@store/modules/userSlice';
+import { checkUserInfoByToken, setTokenKey } from '@store/modules/userSlice';
 import { showNotification } from '@mantine/notifications';
+import { z } from 'zod';
+import { useRef } from 'react';
 
 const LoginForm = (props: any) => {
   const { setLoginModalOpened } = props;
+  // 验证扫描
+  const schema = z.object({
+    userName: z.string().min(1, { message: '别忘记了你的用户名啊' }),
+    password: z.string().min(4, { message: '密码怎么可能忘记呢' }),
+    captcha: z.string().min(1, { message: '哎，你忘记右侧验证码了吗' }),
+  });
   // 表单的hooks
   const form = useForm({
+    schema: zodResolver(schema),
     initialValues: {
       userName: '468264345@qq.com', // 用户名
       password: '123456', // 密码
@@ -31,6 +40,8 @@ const LoginForm = (props: any) => {
   });
   const dispatch = useDispatch();
   type FormValues = typeof form.values;
+  // 验证码的ref
+  const verificationRef = useRef<any>();
   const handleSubmit = async (values: FormValues) => {
     const { result, code, message } = await doLogin(values);
     if (code === ResponseCode.SUCCESS) {
@@ -41,6 +52,8 @@ const LoginForm = (props: any) => {
         message: '欢迎您登录到我的博客',
         icon: <FaPassport />,
       });
+      // 触发获取用户信息
+      dispatch(checkUserInfoByToken());
       // 关闭modal弹窗
       setLoginModalOpened(false);
     } else {
@@ -49,6 +62,10 @@ const LoginForm = (props: any) => {
         message: message,
         icon: <FaClosedCaptioning />,
       });
+      // 更新验证码
+      if (verificationRef.current) {
+        verificationRef.current.getVerification();
+      }
     }
   };
   return (
@@ -77,7 +94,7 @@ const LoginForm = (props: any) => {
               />
             </Grid.Col>
             <Grid.Col span={5}>
-              <Verification />
+              <Verification ref={verificationRef} />
             </Grid.Col>
           </Grid>
 

@@ -8,9 +8,8 @@
  */
 import { UserApi } from '@api/user/index';
 import { Image } from '@mantine/core';
-import { useEffect, useState } from 'react';
-
-const Verification = () => {
+import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
+function Verification(props: any, ref: any) {
   const [captchaSrc, setCaptchaSrc] = useState<string>();
 
   // 获取图灵验证码
@@ -23,6 +22,13 @@ const Verification = () => {
   useEffect(() => {
     getVerification();
   }, [captchaSrc]);
+
+  // 暴露获取验证码的方法给父组件
+  useImperativeHandle(ref, () => ({
+    getVerification: () => {
+      getVerification();
+    },
+  }));
   return (
     <>
       <Image
@@ -35,6 +41,8 @@ const Verification = () => {
       />
     </>
   );
-};
+}
+
+Verification = forwardRef(Verification);
 
 export default Verification;
