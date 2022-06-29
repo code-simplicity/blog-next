@@ -9,7 +9,7 @@
 import Verification from '@components/Verification';
 import { Box, Button, Grid, Group, PasswordInput, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { FaUserLock } from 'react-icons/fa';
+import { FaClosedCaptioning, FaPassport, FaUserLock } from 'react-icons/fa';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import { GoVerified } from 'react-icons/go';
 import { AiOutlineAntDesign } from 'react-icons/ai';
@@ -19,7 +19,8 @@ import { useDispatch } from 'react-redux';
 import { setTokenKey } from '@store/modules/userSlice';
 import { showNotification } from '@mantine/notifications';
 
-const LoginForm = () => {
+const LoginForm = (props: any) => {
+  const { setLoginModalOpened } = props;
   // 表单的hooks
   const form = useForm({
     initialValues: {
@@ -38,11 +39,15 @@ const LoginForm = () => {
       showNotification({
         title: '登录成功',
         message: '欢迎您登录到我的博客',
+        icon: <FaPassport />,
       });
+      // 关闭modal弹窗
+      setLoginModalOpened(false);
     } else {
       showNotification({
         title: '登录失败',
         message: message,
+        icon: <FaClosedCaptioning />,
       });
     }
   };

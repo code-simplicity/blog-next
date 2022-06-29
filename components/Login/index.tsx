@@ -46,7 +46,7 @@ const LoginModal = (props: any) => {
     if (formCheckState === LoginFormConfig.login.formCheckState)
       return (
         <>
-          <LoginForm />
+          <LoginForm setLoginModalOpened={setLoginModalOpened} />
           <Grid className="my-2">
             <Grid.Col span={6}>
               <Group>

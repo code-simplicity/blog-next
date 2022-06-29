@@ -8,11 +8,12 @@
  */
 import MenuHeaderLogin from '@locales/lang/zh-CN/menuHeader';
 import { ActionIcon, Avatar, Button, Group, Menu, Popover, Text } from '@mantine/core';
+import { doLogout } from '@store/modules/userSlice';
 import { useState } from 'react';
 import { BsChevronCompactDown, BsChevronCompactUp, BsFillBellFill } from 'react-icons/bs';
 import { BsFillShieldLockFill } from 'react-icons/bs';
 import { RiAdminFill, RiLogoutCircleRFill } from 'react-icons/ri';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const UserDropdown = (props: any) => {
   const { setLoginModalOpened } = props;
@@ -35,12 +36,13 @@ const UserDropdown = (props: any) => {
   };
   // 点击item实现不同的方法
   const handleChildeMenu = (args: string) => {
-    if (args === MenuHeaderLogin.doLogout.title) return doLogout();
-    if (args === MenuHeaderLogin.doAdmin.title) return doAdmin();
+    if (args === MenuHeaderLogin.doLogout.name) return toLogout();
+    if (args === MenuHeaderLogin.doAdmin.name) return doAdmin();
   };
+  const dispatch = useDispatch();
   // 退出登录的方法
-  const doLogout = () => {
-    console.log('退出登录 :>> ');
+  const toLogout = async () => {
+    dispatch(doLogout());
   };
   const doAdmin = () => {
     console.log('去管理中心 :>> ');
@@ -48,7 +50,7 @@ const UserDropdown = (props: any) => {
   return (
     <>
       <div className="flex items-center">
-        {tokenKey !== '' ? (
+        {tokenKey !== '' && userInfo.userName !== '' ? (
           <div className="flex items-center">
             <BsFillBellFill className="text-2xl" />
             <Menu
@@ -76,13 +78,13 @@ const UserDropdown = (props: any) => {
                 </div>
               }
             >
-              <Menu.Item onClick={() => handleChildeMenu(MenuHeaderLogin.doLogout.title)}>
+              <Menu.Item onClick={() => handleChildeMenu(MenuHeaderLogin.doLogout.name)}>
                 <div className="flex items-center hover:text-purple-600">
                   <RiLogoutCircleRFill className="mr-2" />
                   <span>{MenuHeaderLogin.doLogout.title}</span>
                 </div>
               </Menu.Item>
-              <Menu.Item onClick={() => handleChildeMenu(MenuHeaderLogin.doLogout.title)}>
+              <Menu.Item onClick={() => handleChildeMenu(MenuHeaderLogin.doAdmin.name)}>
                 <div className="flex items-center hover:text-purple-600">
                   <RiAdminFill className="mr-2" />
                   <span>{MenuHeaderLogin.doAdmin.title}</span>

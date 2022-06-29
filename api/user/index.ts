@@ -6,6 +6,7 @@ export enum UserApi {
   GetCaptcha = '/user/captcha',
   DoLogin = '/user/login/',
   CheckToken = '/user/check-token',
+  Logout = '/user/logout',
 }
 
 /**
@@ -28,5 +29,15 @@ export const doLogin = (data: DoLoginParamsType) => {
 export const checkToken = () => {
   return defHttp.get({
     url: UserApi.CheckToken,
+  });
+};
+
+/**
+ * 退出登录
+ * @returns
+ */
+export const logout = () => {
+  return defHttp.get({
+    url: UserApi.Logout,
   });
 };
