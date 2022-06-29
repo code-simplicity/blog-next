@@ -1,18 +1,32 @@
 import { defHttp } from '@utils/http';
 import useSWR from 'swr';
+import type { DoLoginParamsType } from './type';
 
 export enum UserApi {
   GetCaptcha = '/user/captcha',
   DoLogin = '/user/login/',
+  CheckToken = '/user/check-token',
 }
 
 /**
- * 获取图灵验证码
+ * 登录
+ * @param data
+ * @returns
  */
-export const doLogin = (params) => {
-  const { captcha, ...user } = params;
+export const doLogin = (data: DoLoginParamsType) => {
+  const { captcha, ...user } = data;
   return defHttp.post({
     url: `${UserApi.DoLogin}${captcha}`,
     data: user,
+  });
+};
+
+/**
+ * 检查用户是否登录
+ * @returns
+ */
+export const checkToken = () => {
+  return defHttp.get({
+    url: UserApi.CheckToken,
   });
 };

@@ -12,6 +12,7 @@ import {
 import storage from 'redux-persist/lib/storage';
 import promiseMiddleware from 'redux-promise';
 import appSlice from './modules/appSlice';
+import userSlice from './modules/userSlice';
 
 // 数据持久化配置
 const persistConfig = {
@@ -22,6 +23,7 @@ const persistConfig = {
 // 配置reducers
 const reducers = combineReducers({
   app: appSlice,
+  user: userSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);

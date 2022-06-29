@@ -14,6 +14,10 @@ import { RiLockPasswordFill } from 'react-icons/ri';
 import { GoVerified } from 'react-icons/go';
 import { AiOutlineAntDesign } from 'react-icons/ai';
 import { doLogin } from '@api/user';
+import { ResponseCode } from '@utils/enums/ResponseCode';
+import { useDispatch } from 'react-redux';
+import { setTokenKey } from '@store/modules/userSlice';
+import { showNotification } from '@mantine/notifications';
 
 const LoginForm = () => {
   // 表单的hooks
@@ -24,10 +28,23 @@ const LoginForm = () => {
       captcha: '', // 图灵验证码
     },
   });
+  const dispatch = useDispatch();
   type FormValues = typeof form.values;
   const handleSubmit = async (values: FormValues) => {
-    const result = await doLogin(values);
-    console.log('result :>> ', result);
+    const { result, code, message } = await doLogin(values);
+    if (code === ResponseCode.SUCCESS) {
+      // 设置token
+      dispatch(setTokenKey(result));
+      showNotification({
+        title: '登录成功',
+        message: '欢迎您登录到我的博客',
+      });
+    } else {
+      showNotification({
+        title: '登录失败',
+        message: message,
+      });
+    }
   };
   return (
     <>

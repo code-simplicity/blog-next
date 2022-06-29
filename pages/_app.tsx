@@ -49,7 +49,7 @@ export default function App(props: AppProps) {
         }}
         styles={{
           Button: (theme, params: ButtonStylesParams) => ({
-            root: { height: 36, padding: '0 26px' },
+            root: { height: 36, padding: '0 26px', backgroundColor: 'orange' },
             filled: {
               color: theme.colors[params.color || theme.primaryColor][6],
               '&:hover': {
