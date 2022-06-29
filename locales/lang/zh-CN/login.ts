@@ -23,5 +23,9 @@ const LoginFormConfig = {
     formCheckState: 'forgotPasswordForm',
     title: '忘记密码',
   },
+  loginBtnText: {
+    loginess: '登录中',
+    login: '登录',
+  },
 };
 export default LoginFormConfig;

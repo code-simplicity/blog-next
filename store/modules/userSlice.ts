@@ -20,6 +20,7 @@ export const checkUserInfoByToken: any = createAsyncThunk('/user/check-token', a
       title: '用户未登录',
       message: `${result.message}`,
     });
+    return result.result;
   }
 });
 

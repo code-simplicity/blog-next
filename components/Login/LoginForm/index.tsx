@@ -19,7 +19,8 @@ import { useDispatch } from 'react-redux';
 import { checkUserInfoByToken, setTokenKey } from '@store/modules/userSlice';
 import { showNotification } from '@mantine/notifications';
 import { z } from 'zod';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
+import LoginFormConfig from '@locales/lang/zh-CN/login';
 
 const LoginForm = (props: any) => {
   const { setLoginModalOpened } = props;
@@ -40,9 +41,12 @@ const LoginForm = (props: any) => {
   });
   const dispatch = useDispatch();
   type FormValues = typeof form.values;
+  // 登录状态
+  const [loginStatus, setLoginStatus] = useState<boolean>(false);
   // 验证码的ref
   const verificationRef = useRef<any>();
   const handleSubmit = async (values: FormValues) => {
+    setLoginStatus(true);
     const { result, code, message } = await doLogin(values);
     if (code === ResponseCode.SUCCESS) {
       // 设置token
@@ -52,11 +56,13 @@ const LoginForm = (props: any) => {
         message: '欢迎您登录到我的博客',
         icon: <FaPassport />,
       });
+      setLoginStatus(false);
       // 触发获取用户信息
       dispatch(checkUserInfoByToken());
       // 关闭modal弹窗
       setLoginModalOpened(false);
     } else {
+      setLoginStatus(false);
       showNotification({
         title: '登录失败',
         message: message,
@@ -104,8 +110,11 @@ const LoginForm = (props: any) => {
               loaderPosition="right"
               fullWidth
               type="submit"
+              loading={loginStatus}
             >
-              登录
+              {loginStatus
+                ? LoginFormConfig.loginBtnText.loginess
+                : LoginFormConfig.loginBtnText.login}
             </Button>
           </Group>
         </form>
