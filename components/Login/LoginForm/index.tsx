@@ -28,7 +28,7 @@ const LoginForm = (props: any) => {
   const schema = z.object({
     userName: z.string().min(1, { message: '别忘记了你的用户名啊' }),
     password: z.string().min(4, { message: '密码怎么可能忘记呢' }),
-    captcha: z.string().min(1, { message: '哎，你忘记右侧验证码了吗' }),
+    captchaCode: z.string().min(1, { message: '哎，你忘记右侧验证码了吗' }),
   });
   // 表单的hooks
   const form = useForm({
@@ -36,7 +36,7 @@ const LoginForm = (props: any) => {
     initialValues: {
       userName: '468264345@qq.com', // 用户名
       password: '123456', // 密码
-      captcha: '', // 图灵验证码
+      captchaCode: '', // 图灵验证码
     },
   });
   const dispatch = useDispatch();
@@ -96,7 +96,7 @@ const LoginForm = (props: any) => {
                 icon={<GoVerified />}
                 className="mb-2 md:mb-4"
                 placeholder="输入图灵验证码"
-                {...form.getInputProps('captcha')}
+                {...form.getInputProps('captchaCode')}
               />
             </Grid.Col>
             <Grid.Col span={5}>

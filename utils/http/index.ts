@@ -235,7 +235,7 @@ function createAxios(options?: Partial<CreateAxiosOptions>) {
           // 接口拼接地址
           urlPrefix: '',
           //  是否加入时间戳
-          joinTime: true,
+          joinTime: false,
           // 忽略重复请求
           ignoreCancelToken: true,
           // 是否携带token
