@@ -31,9 +31,7 @@ const UserInfoCard = () => {
     <>
       <Card shadow="md" p="sm" radius="md" className="mb-4">
         {adminInfo === null ? (
-          <Card.Section>
-            <SkeletonLoading />
-          </Card.Section>
+          <SkeletonLoading />
         ) : (
           <>
             <Card.Section>

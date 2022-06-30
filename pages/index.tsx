@@ -2,7 +2,7 @@
  * @Author: bugdr
  * @Date: 2022-06-25 09:06:48
  * @LastEditors: bugdr
- * @LastEditTime: 2022-06-30 16:03:30
+ * @LastEditTime: 2022-06-30 22:28:21
  * @FilePath: \blog-next\pages\index.tsx
  * @Description:
  */
@@ -23,6 +23,7 @@ import {
 } from '@mantine/core';
 import { motion, useViewportScroll } from 'framer-motion';
 import LeftCard from '@components/LeftCard';
+import RightCard from '@components/RightCard';
 
 const Home: NextPage = () => {
   const theme = useMantineTheme();
@@ -103,25 +104,9 @@ const Home: NextPage = () => {
           </motion.div>
         </section>
         {/* 右侧模块 */}
-        <div className="w-64 md:mr-24 bg-dark-100">
-          <Card shadow="sm" p="lg">
-            <Group position="apart" style={{ marginBottom: 5, marginTop: theme.spacing.sm }}>
-              <Text weight={500}>Norway Fjord Adventures</Text>
-              <Badge color="pink" variant="light">
-                On Sale
-              </Badge>
-            </Group>
-
-            <Text size="sm">
-              With Fjord Tours you can explore more of the magical fjord landscapes with tours and
-              activities on and around the fjords of Norway
-            </Text>
-
-            <Button variant="light" color="blue" fullWidth style={{ marginTop: 14 }}>
-              Book classic tour now
-            </Button>
-          </Card>
-        </div>
+        <section className="w-64 md:mr-24 ">
+          <RightCard />
+        </section>
       </section>
     </>
   );
