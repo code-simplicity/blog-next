@@ -2,7 +2,7 @@
  * @Author: bugdr
  * @Date: 2022-06-25 09:06:48
  * @LastEditors: bugdr
- * @LastEditTime: 2022-06-28 09:46:51
+ * @LastEditTime: 2022-06-30 16:42:40
  * @FilePath: \blog-next\pages\_app.tsx
  * @Description:
  */
@@ -17,7 +17,6 @@ import { Provider } from 'react-redux';
 import { persister, store } from '@store/index';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 import { NotificationsProvider } from '@mantine/notifications';
-import { SWRConfig } from 'swr';
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;

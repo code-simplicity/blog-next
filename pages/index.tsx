@@ -2,7 +2,7 @@
  * @Author: bugdr
  * @Date: 2022-06-25 09:06:48
  * @LastEditors: bugdr
- * @LastEditTime: 2022-06-30 14:16:03
+ * @LastEditTime: 2022-06-30 16:03:30
  * @FilePath: \blog-next\pages\index.tsx
  * @Description:
  */
@@ -46,7 +46,6 @@ const Home: NextPage = () => {
     console.log('scrolledTop', scrolledTop);
   };
   useEffect(() => {
-    onWindowScrollListen();
     window.addEventListener('scroll', onWindowScrollListen);
     window.onresize = function () {
       onWindowScrollListen();

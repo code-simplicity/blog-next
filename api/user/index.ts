@@ -1,6 +1,13 @@
+/*
+ * @Author: bugdr
+ * @Date: 2022-06-28 12:32:03
+ * @LastEditors: bugdr
+ * @LastEditTime: 2022-06-30 15:43:14
+ * @FilePath: \blog-next\api\user\index.ts
+ * @Description:
+ */
 import { defHttp } from '@utils/http';
-import useSWR from 'swr';
-import type { DoLoginType, GetEmailCodeType, RegisterUserType } from './type';
+import type { DoLoginType, GetAdminInfoType, GetEmailCodeType, RegisterUserType } from './type';
 
 export enum UserApi {
   GetCaptcha = '/user/captcha',
@@ -9,6 +16,7 @@ export enum UserApi {
   Logout = '/user/logout',
   RegisterUser = '/user/join_in',
   GetEmailCode = '/user/verify_code',
+  GetAdminUserInfo = '/user/admin/info',
 }
 
 /**
@@ -65,6 +73,18 @@ export const registerUser = (data: RegisterUserType) => {
 export const getEmailCode = (params: GetEmailCodeType) => {
   return defHttp.get({
     url: `${UserApi.GetEmailCode}`,
+    params,
+  });
+};
+
+/**
+ * 获取管理员信息
+ * @param params
+ * @returns
+ */
+export const getAdminInfo = (params: GetAdminInfoType) => {
+  return defHttp.get({
+    url: `${UserApi.GetAdminUserInfo}`,
     params,
   });
 };
