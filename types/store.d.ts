@@ -2,7 +2,7 @@
  * @Author: bugdr
  * @Date: 2022-06-26 22:08:04
  * @LastEditors: bugdr
- * @LastEditTime: 2022-06-27 12:31:54
+ * @LastEditTime: 2022-06-30 07:19:15
  * @FilePath: \blog-next\types\store.d.ts
  * @Description:
  */
@@ -19,6 +19,6 @@ export interface userInfoType {
 }
 
 export interface userSliceType {
-  userInfo: userInfoType;
-  tokenKey: string;
+  userInfo: null;
+  tokenKey?: string | null;
 }

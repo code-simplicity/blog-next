@@ -2,13 +2,15 @@
  * @Author: bugdr
  * @Date: 2022-06-25 16:43:00
  * @LastEditors: bugdr
- * @LastEditTime: 2022-06-27 17:33:25
+ * @LastEditTime: 2022-06-30 07:23:57
  * @FilePath: \blog-next\components\Header\UserDropdown\UserDropdown.tsx
  * @Description:
  */
 import MenuHeaderLogin from '@locales/lang/zh-CN/menuHeader';
 import { ActionIcon, Avatar, Button, Group, Menu, Popover, Text } from '@mantine/core';
+import { showNotification } from '@mantine/notifications';
 import { doLogout } from '@store/modules/userSlice';
+import { isNull } from 'lodash-es';
 import { useState } from 'react';
 import { BsChevronCompactDown, BsChevronCompactUp, BsFillBellFill } from 'react-icons/bs';
 import { BsFillShieldLockFill } from 'react-icons/bs';
@@ -46,11 +48,15 @@ const UserDropdown = (props: any) => {
   };
   const doAdmin = () => {
     console.log('去管理中心 :>> ');
+    showNotification({
+      title: '还未实现哦',
+      message: '客官不可以点击哦，因为还没有实现',
+    });
   };
   return (
     <>
       <div className="flex items-center">
-        {tokenKey !== '' && userInfo.userName !== '' ? (
+        {tokenKey !== null && userInfo !== null ? (
           <div className="flex items-center">
             <BsFillBellFill className="text-2xl" />
             <Menu

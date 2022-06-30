@@ -1,3 +1,11 @@
+/*
+ * @Author: bugdr
+ * @Date: 2022-06-28 16:20:06
+ * @LastEditors: bugdr
+ * @LastEditTime: 2022-06-30 07:20:24
+ * @FilePath: \blog-next\store\modules\userSlice.ts
+ * @Description:
+ */
 import type { userSliceType } from '#types/store';
 import { checkToken, logout } from '@api/user';
 import { showNotification } from '@mantine/notifications';
@@ -40,12 +48,8 @@ export const doLogout: any = createAsyncThunk('/user/logout', async () => {
 });
 
 const initialState: userSliceType = {
-  userInfo: {
-    id: '',
-    userName: '',
-    avatar: '',
-  },
-  tokenKey: '',
+  userInfo: null,
+  tokenKey: null,
 };
 
 export const userSlice = createSlice({
@@ -69,8 +73,8 @@ export const userSlice = createSlice({
     // 退出登录
     builder.addCase(doLogout.fulfilled, (state) => {
       // 将用户信息清除，清除token
-      state.userInfo = {};
-      state.tokenKey = '';
+      state.userInfo = null;
+      state.tokenKey = null;
     });
   },
 });

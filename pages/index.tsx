@@ -2,26 +2,127 @@
  * @Author: bugdr
  * @Date: 2022-06-25 09:06:48
  * @LastEditors: bugdr
- * @LastEditTime: 2022-06-26 08:08:22
+ * @LastEditTime: 2022-06-30 14:16:03
  * @FilePath: \blog-next\pages\index.tsx
  * @Description:
  */
 import type { NextPage } from 'next';
-import Head from 'next/head';
-import Image from 'next/image';
 import styles from '../styles/Home.module.css';
-import { useState } from 'react';
-
-import { useMantineTheme } from '@mantine/core';
-import Carousel from '@components/Carousel';
+import { useEffect, useRef, useState } from 'react';
+import {
+  useMantineTheme,
+  Card,
+  Image,
+  Group,
+  Text,
+  Badge,
+  Button,
+  Avatar,
+  Box,
+  Tooltip,
+} from '@mantine/core';
+import { motion, useViewportScroll } from 'framer-motion';
+import LeftCard from '@components/LeftCard';
 
 const Home: NextPage = () => {
   const theme = useMantineTheme();
-  const [opened, setOpened] = useState(false);
+  // 获取屏幕滚动的边界，第一个card到大屏幕边界的时候出发固定
+  const leftContent = useRef<any>();
+  const mainContent = useRef<any>();
+  // 屏幕滚动监听
+  const onWindowScrollListen = () => {
+    const scrolledTop = document.documentElement.scrollTop;
+    // 屏幕滚动到620,侧边栏就改为fixed定位
+    if (scrolledTop >= 620 && leftContent.current !== undefined) {
+      leftContent.current.style.position = 'fixed';
+      leftContent.current.style.top = '70px';
+      leftContent.current.style.zIndex = 99;
+      mainContent.current.style.marginLeft = `${leftContent.current.offsetWidth + 112}px`;
+    } else if (scrolledTop < 620) {
+      leftContent.current.style.position = '';
+      leftContent.current.style.overflow = 'hidden';
+      mainContent.current.style.marginLeft = '';
+    }
+    console.log('scrolledTop', scrolledTop);
+  };
+  useEffect(() => {
+    onWindowScrollListen();
+    window.addEventListener('scroll', onWindowScrollListen);
+    window.onresize = function () {
+      onWindowScrollListen();
+    };
+  }, []);
   return (
     <>
-      <section>
-        <div>首页</div>
+      <section className="flex">
+        {/* 左侧 */}
+        <div className="w-64 mr-4 md:ml-24 bg-dark-100" ref={leftContent}>
+          {/* 用户卡片 */}
+          <LeftCard />
+        </div>
+        {/* 中间模块 */}
+        <section className="flex-1 mr-4" ref={mainContent}>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="mb-4 bg-gray-500 h-72"
+          >
+            中间
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="mb-4 bg-gray-500 h-72"
+          >
+            中间
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="mb-4 bg-gray-500 h-72"
+          >
+            中间
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="mb-4 bg-gray-500 h-72"
+          >
+            中间
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="mb-4 bg-gray-500 h-72"
+          >
+            中间
+          </motion.div>
+        </section>
+        {/* 右侧模块 */}
+        <div className="w-64 md:mr-24 bg-dark-100">
+          <Card shadow="sm" p="lg">
+            <Group position="apart" style={{ marginBottom: 5, marginTop: theme.spacing.sm }}>
+              <Text weight={500}>Norway Fjord Adventures</Text>
+              <Badge color="pink" variant="light">
+                On Sale
+              </Badge>
+            </Group>
+
+            <Text size="sm">
+              With Fjord Tours you can explore more of the magical fjord landscapes with tours and
+              activities on and around the fjords of Norway
+            </Text>
+
+            <Button variant="light" color="blue" fullWidth style={{ marginTop: 14 }}>
+              Book classic tour now
+            </Button>
+          </Card>
+        </div>
       </section>
     </>
   );
