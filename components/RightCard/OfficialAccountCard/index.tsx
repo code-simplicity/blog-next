@@ -24,7 +24,7 @@ const OfficialAccountCard = () => {
             公众号
           </Text>
         </Box>
-        <Card.Section>
+        <Card.Section className="p-2">
           <Image src="/gongzhonghao.png" height={240} alt="公众号" />
         </Card.Section>
       </Card>

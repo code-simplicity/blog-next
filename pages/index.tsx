@@ -24,27 +24,45 @@ import {
 import { motion, useViewportScroll } from 'framer-motion';
 import LeftCard from '@components/LeftCard';
 import RightCard from '@components/RightCard';
+import AppletCard from '@components/RightCard/AppletCard';
+import OfficialAccountCard from '@components/RightCard/OfficialAccountCard';
+import MusicCard from '@components/RightCard/MusicCard';
+import HotTagsCard from '@components/RightCard/HotTagsCard';
+import NoticeCard from '@components/RightCard/NoticeCard';
 
 const Home: NextPage = () => {
-  const theme = useMantineTheme();
   // 获取屏幕滚动的边界，第一个card到大屏幕边界的时候出发固定
-  const leftContent = useRef<any>();
+  const leftContentCard = useRef<any>();
   const mainContent = useRef<any>();
+  const rightContentCard = useRef<any>();
+  const [rightHiddenCard, setRightHiddenCard] = useState(false);
   // 屏幕滚动监听
   const onWindowScrollListen = () => {
     const scrolledTop = document.documentElement.scrollTop;
     // 屏幕滚动到620,侧边栏就改为fixed定位
-    if (scrolledTop >= 620 && leftContent.current !== undefined) {
-      leftContent.current.style.position = 'fixed';
-      leftContent.current.style.top = '70px';
-      leftContent.current.style.zIndex = 99;
-      mainContent.current.style.marginLeft = `${leftContent.current.offsetWidth + 112}px`;
+    if (scrolledTop >= 620 && leftContentCard.current !== undefined) {
+      leftContentCard.current.style.position = 'fixed';
+      leftContentCard.current.style.top = '70px';
+      leftContentCard.current.style.zIndex = 99;
+      mainContent.current.style.marginLeft = `${leftContentCard.current.offsetWidth + 112}px`;
     } else if (scrolledTop < 620) {
-      leftContent.current.style.position = '';
-      leftContent.current.style.overflow = 'hidden';
+      leftContentCard.current.style.position = '';
+      leftContentCard.current.style.overflow = 'hidden';
       mainContent.current.style.marginLeft = '';
     }
-    console.log('scrolledTop', scrolledTop);
+    if (scrolledTop >= 1330 && rightContentCard.current !== undefined) {
+      rightContentCard.current.style.position = 'fixed';
+      rightContentCard.current.style.top = '70px';
+      rightContentCard.current.style.right = '16px';
+      rightContentCard.current.style.zIndex = 99;
+      mainContent.current.style.marginRight = `${rightContentCard.current.offsetWidth + 112}px`;
+      setRightHiddenCard(true);
+    } else if (scrolledTop < 1330) {
+      rightContentCard.current.style.position = '';
+      rightContentCard.current.style.overflow = 'hidden';
+      mainContent.current.style.marginRight = '';
+      setRightHiddenCard(false);
+    }
   };
   useEffect(() => {
     window.addEventListener('scroll', onWindowScrollListen);
@@ -54,9 +72,9 @@ const Home: NextPage = () => {
   }, []);
   return (
     <>
-      <section className="flex">
+      <section className="md:flex">
         {/* 左侧 */}
-        <div className="w-64 mr-4 md:ml-24 bg-dark-100" ref={leftContent}>
+        <div className="w-64 mr-4 md:ml-24 bg-dark-100" ref={leftContentCard}>
           {/* 用户卡片 */}
           <LeftCard />
         </div>
@@ -104,8 +122,24 @@ const Home: NextPage = () => {
           </motion.div>
         </section>
         {/* 右侧模块 */}
-        <section className="w-72 md:mr-24 ">
-          <RightCard />
+        <section className="w-72 md:mr-24" ref={rightContentCard}>
+          {rightHiddenCard ? (
+            <>
+              <NoticeCard />
+              <HotTagsCard />
+              <MusicCard />
+            </>
+          ) : (
+            <>
+              <NoticeCard />
+              <HotTagsCard />
+              <MusicCard />
+              <OfficialAccountCard />
+              <AppletCard />
+            </>
+          )}
+
+          {/* <RightCard /> */}
         </section>
       </section>
     </>
