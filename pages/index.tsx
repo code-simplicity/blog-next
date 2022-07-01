@@ -104,7 +104,7 @@ const Home: NextPage = () => {
           </motion.div>
         </section>
         {/* 右侧模块 */}
-        <section className="w-64 md:mr-24 ">
+        <section className="w-72 md:mr-24 ">
           <RightCard />
         </section>
       </section>
