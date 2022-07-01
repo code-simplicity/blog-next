@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Image } from '@mantine/core';
+import { Box, Image } from '@mantine/core';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper';
@@ -34,8 +34,14 @@ const Carousel = () => {
         {looperData && looperData.length
           ? looperData.map((item: any) => {
               return (
-                <SwiperSlide className="md:w-full overflow-clip" key={item.id}>
-                  <Image alt={item.title} src={item.imageUrl} height={680} />
+                <SwiperSlide key={item.id}>
+                  <Box className="h-96">
+                    <Image
+                      alt={item.title}
+                      src={item.imageUrl}
+                      className="absolute top-0 left-o right-0 object-cover"
+                    />
+                  </Box>
                 </SwiperSlide>
               );
             })
