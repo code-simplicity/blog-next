@@ -1,4 +1,4 @@
-const withLess = require('next-with-less');
+import withLess from 'next-with-less';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = withLess({

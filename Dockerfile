@@ -11,7 +11,7 @@ RUN mkdir -p /blogNext
 #6、复制当前的内容到容器内容部目录blog
 COPY . /blogNext
 #7、切换工作目录到blog
-WORKDIR /sobBlogNuxt
+WORKDIR /blogNext
 # 暴露端口
 EXPOSE 3000
 # 安装依赖
