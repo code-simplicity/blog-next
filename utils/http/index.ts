@@ -231,7 +231,8 @@ function createAxios(options?: Partial<CreateAxiosOptions>) {
           // 消息提示类型
           errorMessageMode: 'message',
           // 接口地址
-          apiUrl: 'http://localhost:3000',
+          // apiUrl: `${process.env.NEXT_PUBLIC_HOST}`,
+          apiUrl: '',
           // 接口拼接地址
           urlPrefix: '',
           //  是否加入时间戳

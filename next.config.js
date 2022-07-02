@@ -1,8 +1,10 @@
 const path = require('path');
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  env: {
+    NEXT_PUBLIC_ENV: process.env.NEXT_PUBLIC_ENV,
+  },
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
@@ -10,7 +12,7 @@ const nextConfig = {
     return [
       {
         source: '/:path*',
-        destination: 'http://106.13.233.140:8081/:path*', // Matched parameters can be used in the destination
+        destination: `${process.env.NEXT_PUBLIC_HOST}/:path*`, // Matched parameters can be used in the destination
       },
     ];
   },
