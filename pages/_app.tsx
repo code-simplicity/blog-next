@@ -6,7 +6,7 @@
  * @FilePath: \blog-next\pages\_app.tsx
  * @Description:
  */
-import '../styles/globals.less';
+import '../styles/globals.scss';
 import type { AppProps } from 'next/app';
 
 import Head from 'next/head';

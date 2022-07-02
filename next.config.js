@@ -1,9 +1,11 @@
-import withLess from 'next-with-less';
+const path = require('path');
 
 /** @type {import('next').NextConfig} */
-const nextConfig = withLess({
+const nextConfig = {
   reactStrictMode: true,
-  lessLoaderOptions: {},
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'styles')],
+  },
   async rewrites() {
     return [
       {
@@ -18,6 +20,6 @@ const nextConfig = withLess({
   },
   // 打包构建的目录
   distDir: 'build',
-});
+};
 
 module.exports = nextConfig;
