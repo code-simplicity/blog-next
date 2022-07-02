@@ -19,7 +19,7 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   // 打包构建的目录
-  distDir: 'build',
+  // distDir: 'build',
 };
 
 module.exports = nextConfig;
