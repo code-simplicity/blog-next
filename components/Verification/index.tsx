@@ -9,7 +9,7 @@
 import { UserApi } from '@api/user/index';
 import { Image } from '@mantine/core';
 import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
-function Verification(props: any, ref: any) {
+let Verification: any = (props: any, ref: any) => {
   const [captchaSrc, setCaptchaSrc] = useState<string>();
 
   // 获取图灵验证码
@@ -41,8 +41,8 @@ function Verification(props: any, ref: any) {
       />
     </>
   );
-}
+};
 
-Verification = forwardRef(Verification);
+Verification = forwardRef<any>(Verification);
 
 export default Verification;

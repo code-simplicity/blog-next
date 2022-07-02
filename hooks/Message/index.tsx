@@ -30,10 +30,6 @@ interface NotificationProps {
 export declare type NotificationPlacement = 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight';
 export declare type IconType = 'success' | 'default' | 'error' | 'warning';
 
-export interface ModalOptionsEx extends Omit {
-  iconType: 'warning' | 'success' | 'error' | 'default';
-}
-
 // 获取icon
 function getIcon(iconType: any = 'success'): React.ReactNode {
   if (iconType === 'warning') return <RiErrorWarningFill />;

@@ -8,10 +8,16 @@ const nextConfig = withLess({
     return [
       {
         source: '/:path*',
-        destination: 'http://localhost:8080/:path*', // Matched parameters can be used in the destination
+        destination: 'http://106.13.233.140:8081/:path*', // Matched parameters can be used in the destination
       },
     ];
   },
+  // 忽略ts打包错误
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  // 打包构建的目录
+  distDir: 'build',
 });
 
 module.exports = nextConfig;

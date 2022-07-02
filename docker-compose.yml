@@ -1,0 +1,8 @@
+version: '3.0'
+services:
+  next:
+    restart: always
+    image: blog-nuxt
+    container_name: blog-nuxt
+    ports:
+      - 3000:3000

@@ -67,7 +67,7 @@ export class DAxios {
 
     const axiosCanceler = new AxiosCanceler();
 
-    this.axiosInstance.interceptors.request.use((config: AxiosRequestConfig) => {
+    this.axiosInstance.interceptors.request.use((config: AxiosRequestConfig | any) => {
       const {
         headers: { ignoreCancelToken },
       } = config;

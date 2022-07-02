@@ -106,6 +106,7 @@ const Home: NextPage = () => {
       setArticleListData(result.contents);
     }
   };
+  // TODO:明天处理首页的文章相关的代码和一些后端接口的重构和数据库字段的重构
   useEffect(() => {
     window.addEventListener('scroll', onWindowScrollListen);
     window.onresize = function () {
