@@ -8,8 +8,10 @@ ENV NODE_ENV=production
 ENV HOST 0.0.0.0
 # 创建容器
 RUN mkdir -p /blogNext
-# 切换容器目录
-WORKDIR /blogNext
+#6、复制当前的内容到容器内容部目录blog
+COPY . /blogNext
+#7、切换工作目录到blog
+WORKDIR /sobBlogNuxt
 # 暴露端口
 EXPOSE 3000
 # 安装依赖
