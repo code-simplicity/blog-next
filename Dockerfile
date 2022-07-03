@@ -1,28 +1,36 @@
-# Install dependencies only when needed
-FROM node:16.5.0 AS deps
-# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
-RUN apk add --no-cache libc6-compat
-WORKDIR /blogNext
+# 1. 构建基础镜像
+FROM alpine:1.0 AS base
+#纯净版镜像
+
+ENV NODE_ENV=production \
+    APP_PATH=/app
+
+WORKDIR $APP_PATH
+
+# 使用国内镜像，加速下面 apk add下载安装alpine不稳定情况
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+
+# 使用apk命令安装 nodejs 和 yarn
+RUN apk add --no-cache --update nodejs=16.5.0-r0 yarn=1.22.18-r0
+
+# 2. 基于基础镜像安装项目依赖
+FROM base AS install
+
 COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
 
-# Rebuild the source code only when needed
-FROM node:16.5.0 AS builder
-WORKDIR /blogNext
+RUN yarn install
+
+# 3. 基于基础镜像进行最终构建
+FROM base
+
+# 拷贝 上面生成的 node_modules 文件夹复制到最终的工作目录下
+COPY --from=install $APP_PATH/node_modules ./node_modules
+
+# 拷贝当前目录下的所有文件(除了.dockerignore里排除的)，都拷贝到工作目录下
 COPY . .
-COPY --from=deps /blogNext/node_modules ./node_modules
-RUN yarn build && yarn install --production --ignore-scripts --prefer-offline
 
-# Production image, copy all the files and run next
-FROM node:16.5.0 AS runner
-WORKDIR /blogNext
-
-ENV NODE_ENV production
-
-USER nextjs
+RUN yarn build
 
 EXPOSE 3000
-
-ENV PORT 3000
 
 CMD ["yarn", "start"]
