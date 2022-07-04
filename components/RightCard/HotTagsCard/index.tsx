@@ -2,7 +2,7 @@
  * @Author: bugdr
  * @Date: 2022-06-30 21:21:59
  * @LastEditors: bugdr
- * @LastEditTime: 2022-07-01 09:07:32
+ * @LastEditTime: 2022-07-04 21:17:38
  * @FilePath: \blog-next\components\RightCard\HotTagsCard\index.tsx
  * @Description:热门标签的关键字
  */
@@ -36,6 +36,8 @@ const HotTagsCard = () => {
     <div
       key={tag.value}
       style={{
+        animation: 'blinker 3s linear infinite',
+        animationDelay: `${Math.random() * 2}s`,
         fontSize: `${size / 50}em`,
         border: `1px solid ${color}`,
         margin: '4px',
