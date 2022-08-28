@@ -2,7 +2,7 @@
  * @Author: bugdr
  * @Date: 2022-06-25 15:31:04
  * @LastEditors: bugdr
- * @LastEditTime: 2022-06-28 08:48:13
+ * @LastEditTime: 2022-08-28 13:13:25
  * @FilePath: \blog-next\locales\lang\zh-CN\sys.ts
  * @Description:文字说明
  */
@@ -13,7 +13,7 @@ const SysConfig = {
   footer: {
     copyright: 'Copyright © Powered bugdr | 🌈 Theme byMrDPY (2020-2022）',
     security: '黔公网安备 xxx',
-    icp: '黔ICP备 xxx号',
+    icp: '黔ICP备2021002417号-1',
   },
   api: {
     operationFailed: '操作失败',
