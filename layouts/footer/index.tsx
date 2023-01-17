@@ -8,6 +8,7 @@
  */
 import SysConfig from '@locales/lang/zh-CN/sys';
 import { Footer } from '@mantine/core';
+// import './index.scss'
 
 const LayoutFooter = () => {
   const { copyright, security, icp } = SysConfig.footer;
@@ -18,7 +19,7 @@ const LayoutFooter = () => {
           <div>{copyright}</div>
           <div className="flex items-center">
             <div>{security}</div>
-            <div>{icp}</div>
+            <a href="https://beian.miit.gov.cn" target="_blank" className="icp">{icp}</a>
           </div>
           <div>本站已运行 259 天 23 时 34 分 38 秒 </div>
           <div className="flex items-center">

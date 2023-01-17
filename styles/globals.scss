@@ -81,3 +81,9 @@ a {
     transform: translateY(-50%);
   }
 }
+
+.icp {
+  &:hover {
+    color: #0070f3;
+  }
+}
